@@ -1,10 +1,4 @@
-## vscodeで仮想環境を読み込みたい
-
-[ctrl] [shift] [p]でコマンドパレット、python:select interpreterから仮想環境を選択
-[参考](https://stackoverflow.com/questions/65369567/import-rest-framework-could-not-be-resolved-but-i-have-installed-djangorestfr)    
-- If you are using VSCode, Ctrl + Shift + P -> Type and select 'Python: Select Interpreter' and enter into your projects virtual environment. This is what worked for me.   
-
-
+# django.md
 ## [django] no such table:django_sessionが出た場合
 python manage.py runserver するディレクトリと同じディレクトリで  
 python manege.py migrate [参考](https://kaerupyokopyoko.hatenablog.com/entry/2017/10/06/063855)    
