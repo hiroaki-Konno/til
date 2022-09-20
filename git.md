@@ -1,5 +1,5 @@
 # Git コミットメッセージ 書き方
-<!-- heading で各サイズのhタグ変換可能 -->
+[参考サイト](https://qiita.com/itosho/items/9565c6ad2ffc24c09364)  
 
 コミット種別と要約を書きます。フォーマットは以下とします。  
 
@@ -31,18 +31,27 @@
 - update：機能修正（バグではない）
 - remove：削除（ファイル）
 
+# ワーキングツリー、インデックス、HEADを使いこなす
+[参考サイト](https://qiita.com/shuntaro_tamura/items/db1aef9cf9d78db50ffe)  
 
-<!-- link で変換可能 -->
-[参考サイト](https://qiita.com/itosho/items/9565c6ad2ffc24c09364)  
+[git reset (--hard/--soft)]
 
-# title_snippet
 
-txt_txt_txt
-> 適当な引用   
+# Git コマンド More?と表示される
+[参考サイト](https://pasomaki.com/git-windows-commandprompt/)
 
-```python
-# fenced_code_block
 ```
+c:¥gitwork>git diff HEAD HEAD^
+More?
+```
+### 原因
+- Windowsコマンドプロンプトで実行している
+- コマンド文の中に「^」（キャレット）が含まれている
 
-<!-- link で変換可能 -->
-[参考サイト](https://)  
+Windowsコマンドプロンプトでは「^」（キャレット）は エスケープ記号として使われる特別な意味を持った記号なので、このような変な結果になる
+
+### 回避方法
+キャレットを含む文字列をダブルクォーテーション（"）で括る
+```
+c:¥gitwork>git diff HEAD "HEAD^"
+```
