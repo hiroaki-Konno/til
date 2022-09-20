@@ -1,4 +1,11 @@
-# リンクや画像のソースに変数を用いて動的に扱う方法
+# django.md
+## runserver時 no such table:django_sessionが出た場合
+データベースのテーブルができていないっぽい？ので  
+`python manage.py runserver` するディレクトリと同じディレクトリで `python manege.py migrate` 
+
+[参考リンク](https://kaerupyokopyoko.hatenablog.com/entry/2017/10/06/063855)  
+
+## リンクや画像のソースに変数を用いて動的に扱う方法
 {% static 'css/パス名~~~' %}のように{% %}を使わず、'css/パス名'を変数に入れて扱うことでほかの変数も扱えるようになる
  
 【成功例】
@@ -21,8 +28,7 @@
 </body>
 ```
 
-# django の環境上でローカルの python ファイルをアナコンダプロンプトで実行する
-### 参考リンク https://qiita.com/jun6428/items/c14ca22d692295a5a391
+## django の環境上でローカルの python ファイルをアナコンダプロンプトで実行する
 python ファイルの文頭にこいつらを入力 ( パスは適宜変わる )  
 modelをimport する前にこの設定が必要らしい  
 ちなみにこいつらは  manage . py からある程度コピペしてきている
@@ -36,16 +42,16 @@ sys.path.append('./')
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 django.setup()
 ```
+[参考リンク](https://qiita.com/jun6428/items/c14ca22d692295a5a391)  
 
-# templateの継承、インクルード
-### 参考リンク https://django.kurodigi.com/template-parts/
+## templateの継承、インクルード
 htmlの共通した部分使いまわせるようにする機能たち。  
 共通の部分をベースとして拡張していくものが継承、逆にパーツを作っておいてそれを差し込む形になるのがインクルード(include)  
-どのファイルもアプリ内のtemplatesの内部に置く
+どのファイルもアプリ内のtemplatesの内部に置く  
+
+[参考リンク](https://django.kurodigi.com/template-parts/)  
 <br>
-<br>
-<br>
-## 継承：{% block 名前 %} と {% extends 'base.html '%}
+### 継承：{% block 名前 %} と {% extends 'base.html '%}
 継承はベースとなるhtml内に{% block 名前 %}と{% endblock %}を書く。これを仮に base.html とする
  
 例) base.html
@@ -90,7 +96,7 @@ top画面
 <br>
 <br>
 <br>
-## インクルード ( include )
+### インクルード ( include )
 差し込みたい部品を別のファイルに保存しておき {% inclde 'ファイルへのパス' %} で差し込んだ場所に表示、使用できるようにする。
  
 差し込む部品のファイルを parts.html 差し込み先を body.htmlとする
@@ -115,11 +121,12 @@ top画面
 <p>これはparts.htmlからのパーツです。</p>
 ```
 
-# テンプレートでの文字列連結
-### 参考リンク https://intellectual-curiosity.tokyo/2019/12/17/django%E3%81%AE%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%81%A7%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E9%80%A3%E7%B5%90%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/
-(djangoのテンプレートで文字列を連結する方法/)
- 
-組み込みフィルタ「add」を使用します。
+## テンプレートでの文字列連結
+
+(djangoのテンプレートで文字列を連結する方法/)  
+組み込みフィルタ「add」を使用します。  
+
+[参考リンク](https://intellectual-curiosity.tokyo/2019/12/17/django%E3%81%AE%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%81%A7%E6%96%87%E5%AD%97%E5%88%97%E3%82%92%E9%80%A3%E7%B5%90%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/)  
 
 ```
 {{ value|add:"2" }}
@@ -140,15 +147,15 @@ top画面
  
 上記は、「string1/」と「string2」を連結してtemplateという変数に代入しています。
 templateを表示すると、「string1/string2」という値になります。
-## 注意事項
+### 注意事項
 addで連結するのもが文字列の場合、想定通りの結果となります。
 しかし、連結しようとするものが文字列ではなく数値の場合、エラーが発生したり予期せぬ結果となります。
-## 回避案
+### 回避案
 文字列連結用のカスタムタグを定義して使用します。
 
 以下のようなファイルを作成します。  
 \<appname>\\templatetags\\\<appname>_extras.py
-### ソース
+#### ソース
 ```python
 from django import template
 
@@ -167,23 +174,23 @@ def addstr(arg1, arg2):
         {{ template }}
 {% endwith %}
 ```
-### 実行結果
+#### 実行結果
 ```
 34
 ```
 3と4が文字列として連結された結果になります。
 ちなみに「add」を使用した場合、3と4が加算されて7という結果になります。
 
-# カスタムテンプレートフィルタ・テンプレートタグの作り方
-### 参考リンク https://djangobrothers.com/blogs/custom_template_tags_filters/
+## カスタムテンプレートフィルタ・テンプレートタグの作り方
+[参考リンク](https://djangobrothers.com/blogs/custom_template_tags_filters/)
 
-## テンプレートフィルタ / タグとは
+### テンプレートフィルタ / タグとは
 Djangoのテンプレートには、テンプレート側で処理を行う様々なタグやフィルタが用意されており、これをビルトイン・テンプレートフィルタ / タグと呼ぶ。
 
 よく利用するDjangoのビルトイン・テンプレートタグの例としては、{% if ... %}や{% for ... in ... %}などがあり、ビルトイン・テンプレートフィルタの例としては、lengthやlinebreaksなどがある。 {% %}で利用されるものがタグで、{{ }}で利用されるものがフィルタという認識でOK
 
 これらを自分で作ることができる機能があり、それをカスタムテンプレートフィルタ / タグという
-## カスタムテンプレートフィルタ / タグの作り方
+### カスタムテンプレートフィルタ / タグの作り方
 カスタムテンプレートフィルタ/タグを作るには、3つのステップが必要
 1. アプリ内に **stemplatetags** ディレクトリを作成する
 2. **templatetags** ディレクトリ内に **\_\_init\_\_.py** ファイルを作成する
@@ -207,7 +214,7 @@ appアプリケーションにカスタムフィルタ / タグを追加する
   │  └─__pycache__
   ├─templates
   │  └─video
-  └─templatetags  #ここのフォルダを作成する
+  └─templatetags  ##ここのフォルダを作成する
      ├─__init__.py  
      └─math_tags.py
 ```
@@ -229,18 +236,18 @@ math_tagsモジュールをテンプレートで呼び出す
 
 from django import template
 
-register = template.Library() # Djangoのテンプレートタグライブラリ
+register = template.Library() ## Djangoのテンプレートタグライブラリ
 
-## カスタムテンプレートフィルタの作り方
+### カスタムテンプレートフィルタの作り方
 カスタムフィルタの作成は、1つか2つの引数をとるPython関数を定義し、Djangoのテンプレートタグのライブラリに登録するというステップになります。
 
 上記の例の、math_tags.pyに、二つの数字の掛け算を適用するフィルタを定義してみます。
 ```python
 from django import template
 
-register = template.Library() # Djangoのテンプレートタグライブラリ
+register = template.Library() ## Djangoのテンプレートタグライブラリ
 
-# カスタムフィルタとして登録する
+## カスタムフィルタとして登録する
 
 @register.filter
 def multiply(value1, value2):
@@ -258,16 +265,16 @@ def multiply(value1, value2):
 
 これで、View側で掛け算を行った結果をテンプレートに返すのではなく、テンプレート上の変数を掛け合わせて表示することができるようになりました。
 
-## カスタムテンプレートタグの作り方
+### カスタムテンプレートタグの作り方
 カスタムタグはフィルタよりも複雑な処理を扱うことができますが、カスタムフィルタで利用したmultiply関数の処理をカスタムタグで書いてみます。
 
 ※なお、カスタムテンプレートタグの作り方にはいくつか種類がありますが、ここでは最も一般的なsimple_tagを利用する方法を紹介します。
 ```python
 from django import template
 
-register = template.Library() # Djangoのテンプレートタグライブラリ
+register = template.Library() ## Djangoのテンプレートタグライブラリ
 
-# カスタムタグとして登録する
+## カスタムタグとして登録する
 @register.simple_tag
 def multiply(value1, value2):
     return value1 * value2
@@ -279,7 +286,7 @@ def multiply(value1, value2):
 <!-- num1=3, num2=4のとき、HTML上には12が表示される -->
 <span>掛け算:{% multiply num1 num2 %}</span>
 ```
-## テンプレートフィルタとテンプレートタグの使い分け
+### テンプレートフィルタとテンプレートタグの使い分け
 テンプレートフィルタとテンプレートタグは似たような機能ですが、どのように使い分けるのが良いのでしょうか？
 
 大きく、以下の二つのポイントがあると思います。

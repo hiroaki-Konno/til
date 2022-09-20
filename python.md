@@ -11,3 +11,25 @@
 | 関数 | 全小文字 + アンダースコア区切り	| my_favorite_funcion
 | 変数 | 全小文字 + アンダースコア区切り	| my_favorite_instance
 | 定数 | 全大文字 + アンダースコア区切り
+
+
+## classのインスタンスをprintなりした時の表示を変更
+```
+class Prefecture(models.Model):
+    pref_name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.pref_name # これが表示される
+```
+
+```
+(cs2019_web) C:\Users\xxxx\django>python manage.py shell
+
+(InteractiveConsole)
+>>> from administer_data.models import Prefecture as Pref
+>>> pref = Pref(pref_name = "tokyo") # tokyoを表示名に指定
+>>> pref
+<Prefecture: tokyo>
+```
+
+`def __str__()` にて表示する属性を指定できるらしい。詳しくは調べていない。  
