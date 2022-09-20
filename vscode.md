@@ -1,6 +1,6 @@
 # VSCode.md
   
-## vscodeで仮想環境を読み込みたい
+# vscodeで仮想環境を読み込みたい
 
 [ctrl] [shift] [p]でコマンドパレット、python:select interpreterから仮想環境を選択
 > If you are using VSCode, Ctrl + Shift + P -> Type and select 'Python: Select Interpreter' and enter into your projects virtual environment. This is what worked for me.   
@@ -8,8 +8,8 @@
 [参考サイト](https://stackoverflow.com/questions/65369567/import-rest-framework-could-not-be-resolved-but-i-have-installed-djangorestfr)    
 
 <!-- snippet で変換可能 -->
-## vscode ユーザースニペットの利用(主に.md)
-### 設定手順
+# vscode ユーザースニペットの利用(主に.md)
+## 設定手順
 VsCodeでmarkdownのスニペットを有効にする  
 ファイル → 基本設定 → 設定 → 拡張機能 → settings.json で編集 を選択し、以下を追記  
 
@@ -25,7 +25,7 @@ VsCodeでmarkdownのスニペットを有効にする
 object返せみたいなこと言ってるけどよくわからん  
 たぶんこのエラー `incorrect type.Expected "odject"`
 
-### マークダウン用のスニペット設定を作成する
+## マークダウン用のスニペット設定を作成する
 ファイル → 基本設定 → ユーザースニペット → Markdown.json を選択。
 
 ```json
@@ -65,7 +65,8 @@ object返せみたいなこと言ってるけどよくわからん
   
 [参考サイト？](https://qiita.com/12345/items/97ba616d530b4f692c97)
 
-## Markdown 予測変換
+# Markdown 予測変換
+markdownの構文みたいなのまとめ
 
 **bold**  
 `code`
@@ -75,13 +76,16 @@ fenced_codeblock
 ```
 
 $$
-fenced_math
+fenced math
 $$
 
 #### headingN (Nは任意の数字)
 image ![image](https://)  
+
 $inline_math$  
+
 *italic*  
+
 link [link](https://)  
 
 1. ordered_list
@@ -92,13 +96,13 @@ link [link](https://)
 - _
 - _
 
-> quote
+> quote  
 > _
 
-horizontal rule
 ----------
+horizontal rule
 
-~~strikethrough~~
+strikethrough ~~strikethrough~~  
 
 | table | TH_xxxx | TH_xxxx |
 | --- | --- | --- |
