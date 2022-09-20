@@ -13,8 +13,7 @@
 VsCodeでmarkdownのスニペットを有効にする  
 ファイル → 基本設定 → 設定 → 拡張機能 → settings.json で編集 を選択し、以下を追記  
 
-```json
-/* settings.json */
+```json: settings.json
  "[markdown]": {
     "editor.wordWrap": "on",
     "editor.quickSuggestions": true,
@@ -28,8 +27,7 @@ object返せみたいなこと言ってるけどよくわからん
 ## マークダウン用のスニペット設定を作成する
 ファイル → 基本設定 → ユーザースニペット → Markdown.json を選択。
 
-```json
-/* Markdown.json */
+```json:Markdown.json
 "スニペット名": { 
   "prefix": "キーになる文字列", 
   "body":[ "呼び出される文字列" ], 
@@ -71,7 +69,7 @@ markdownの構文みたいなのまとめ
 **bold**  
 `code`
 
-```python
+```python:test.py
 fenced_codeblock
 ```
 
