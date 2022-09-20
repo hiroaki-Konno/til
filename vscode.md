@@ -21,9 +21,10 @@ VsCodeでmarkdownのスニペットを有効にする
     "editor.snippetSuggestions": "top"
  },
 ```
-
 エラー(黄色い波線)が出るが動くっぽい  
 object返せみたいなこと言ってるけどよくわからん  
+たぶんこのエラー `incorrect type.Expected "odject"`
+
 ### マークダウン用のスニペット設定を作成する
 ファイル → 基本設定 → ユーザースニペット → Markdown.json を選択。
 
@@ -64,16 +65,42 @@ object返せみたいなこと言ってるけどよくわからん
   
 [参考サイト？](https://qiita.com/12345/items/97ba616d530b4f692c97)
 
-<!-- snippet で変換可能 -->
-## title_snippet
-<!-- heading で各サイズのhタグ変換可能 -->
+## Markdown 予測変換
 
-txt_txt_txt
-> 適当な引用   
+**bold**  
+`code`
 
 ```python
-# fenced_code_block
+fenced_codeblock
 ```
 
-<!-- link で変換可能 -->
-[参考サイト](https://)     
+$$
+fenced_math
+$$
+
+#### headingN (Nは任意の数字)
+image ![image](https://)  
+$inline_math$  
+*italic*  
+link [link](https://)  
+
+1. ordered_list
+2. _
+3. _
+
+- unorderd_list
+- _
+- _
+
+> quote
+> _
+
+horizontal rule
+----------
+
+~~strikethrough~~
+
+| table | TH_xxxx | TH_xxxx |
+| --- | --- | --- |
+| TD | TD | TD |
+| TD | TD | TD |
