@@ -33,3 +33,22 @@ class Prefecture(models.Model):
 ```
 
 `def __str__()` にて表示する属性を指定できるらしい。詳しくは調べていない。  
+
+# 関数アノテーション
+引数名のあとの: 式がそれぞれの引数に対するアノテーション（注釈）、括弧と末尾のコロン:の間の-> 式が返り値に対するアノテーションとなる。アノテーションを記述するものと記述しないものが混在していても問題ない。
+
+
+```python
+def func_annotations(x: 'description-x', y: 'description-y') -> 'description-return':
+    return x * y
+
+print(func_annotations('abc', 3))
+# abcabcabc
+
+print(func_annotations(4, 3))
+# 12
+```
+ただし関数アノテーションはあくまでも引数や返り値に対する注釈で、それをもとに特別な処理が行われることはない。  
+実行時に型チェックが行われたりはしないのでアノテーションで指定した型以外の引数を渡しても何も起こらない（エラーにならない）。
+
+[参考サイト](https://note.nkmk.me/python-function-annotations-typing/)  

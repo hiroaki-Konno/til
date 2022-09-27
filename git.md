@@ -37,7 +37,7 @@
 [git reset (--hard/--soft)]
 
 
-# Git コマンド More?と表示される
+# Git コマンドを実行するとMore?と表示される
 [参考サイト](https://pasomaki.com/git-windows-commandprompt/)
 
 ```
