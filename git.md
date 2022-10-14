@@ -55,3 +55,23 @@ Windowsコマンドプロンプトでは「^」（キャレット）は エス�
 ```
 c:¥gitwork>git diff HEAD "HEAD^"
 ```
+
+
+<!-- snippet で変換可能 -->
+# Gitでブランチの派生元を間違えたときの解決方法（rebase --onto、cherry-pick）
+<!-- heading で各サイズのhタグ変換可能 -->
+
+##  1. git rebase --onto  
+作業ブランチの派生元を修正する  
+```
+git rebase --onto {本来の親ブランチ} {間違えて親にしたブランチ} {親変更するブランチ名}
+``` 
+
+## 2. git cherry-pick
+新しいブランチを作り直す,新しい作業ブランチを正しく作成、欲しいコミットだけを適用  
+``` 
+git cherry-pick {コミットID}
+``` 
+
+<!-- link で変換可能 -->
+[参考サイト](https://www.granfairs.com/blog/staff/git-mistake-parent-branch)  
