@@ -1,3 +1,27 @@
+# manage.py shellでmodelのimportがうまくいかない
+#### python
+```python
+from models import TestSaveData
+```
+
+#### error
+```shell
+File "C:\Users\iniad\smaclanavi_background\administer_data\scraping.py", line 2, in <module>
+    from models import TestSaveData
+ModuleNotFoundError: No module named 'models'
+```
+moduleが見つからないと言われてしまう
+### 解決
+#### python
+```python
+from administer_data.models import TestSaveData
+```
+`from [app名].models import [model名]` の形に変更これだと相対パスからしても通る。  
+ファイル単体でも通る？のはよくわからない。installした類の配下に置かれてる判定になってるからだろうか？
+
+参考サイトはない
+
+
 # runserver時 no such table:django_sessionが出た場合
 データベースのテーブルができていないっぽい？ので  
 `python manage.py runserver` するディレクトリと同じディレクトリで `python manege.py migrate` 
