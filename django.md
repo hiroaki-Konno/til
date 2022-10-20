@@ -21,6 +21,50 @@ from administer_data.models import TestSaveData
 
 参考サイトはない
 
+# djangoのmodels.pyをUMLに自動で起こす
+実行するコマンド
+```
+manage.py graph_models administer_data -g -o test_visualized.png
+```
+django-extensions で追加される`manage.py graph_models`を使用  
+
+正直pylintで何故代用できたのかわからない、環境パス通すだけでどうにかなった類なのだろうか  
+
+### 必要パッケージ
+- django-extensions
+- ~~pygraphviz~~ (status code 2とかでうまくいかず、なんなん？)
+- pyparsing
+- pydot
+- pylint [参考](https://qiita.com/kenichi-hamaguchi/items/c0b947ed15725bfdfb5a)
+
+```
+pip install django-extensions
+pip install pyparsing pydot
+pip install pylint
+```
+1. Graphvizが必要なので，[ここ](https://graphviz.gitlab.io/download/)からインストーラを落としてインストール
+2. Graphvizのbinフォルダ(「C:\Program Files\Graphviz\bin」)のPATHを通す
+3. 出力可能な形式をdot -Txxxで確認する。ここでエラーが起きると，Graphvizのインストールができてないか，パスが通っていない。
+```
+$ dot -Txxx
+Format: "xxx" not recognized. Use one of: bmp canon cmap cmapx cmapx_np dot emf emfplus eps fig gd gd2 gif gv imap imap_np ismap jpe jpeg jpg metafile pdf pic plain plain-ext png pov ps ps2 svg svgz tif tiff tk vml vmlz vrml wbmp xdot xdot1.2 xdot1.4
+```
+4. インストールできたかテストする。
+```
+pyreverse -o png -p Pyreverse pylint/pyreverse/
+```
+以下の2つのファイル(冒頭の図)がカレントディレクトリの下にできていれば，インストール完了。
+- classes_Pyreverse.png
+- packages_Pyreverse.png
+
+### 参考
+<!-- link で変換可能 -->
+[[python] クラス図を自動生成する](https://qiita.com/kenichi-hamaguchi/items/c0b947ed15725bfdfb5a)  
+
+[django-extensions 公式docs](https://django-extensions.readthedocs.io/en/latest/graph_models.html)  
+
+[windowsのパスを通す(環境変数の追加)](https://qiita.com/sta/items/63e1048025d1830d12fd)
+
 
 # runserver時 no such table:django_sessionが出た場合
 データベースのテーブルができていないっぽい？ので  
