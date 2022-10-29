@@ -1,3 +1,49 @@
+<!-- snippet で変換可能 -->
+# serializerでfieldに関数を設定して動的な値を返す
+<!-- heading で各サイズのhタグ変換可能 -->
+### 目的
+
+子要素の最新のupdatedを取得して親のupdatedも更新するようにしたい 
+
+### 解決
+1対多の参照をmodel内に定義するのは難しそうだったのでmodelに対応したserializerのクラスに関数を絡ませたfieldを作った。
+
+### 詳細
+serializer内に
+```python
+class SomeSerializer(serializers.ModelSerializer):    
+    updated = serializers.SerializerMethodField()
+
+    def get_updated(self, obj):
+        """ 複数あるschedulesのupdatedを比較して最新のupdatedを
+        UpcominglecInfoのupdatedに設定する """
+        # 該当するインスタンスをget、modelで定義したrelatednameで逆参照をかける
+        upcomeinfo = UpcomingLecInfos.objects.get(id=obj.id)
+        related_schedules = upcomeinfo.schedules.all()
+
+        latest_date = related_schedules[0].updated
+
+        for s in related_schedules:
+            if latest_date < s.updated:
+                latest_date = s.updated
+
+        return latest_date
+```
+を追加  
+`get_<field_name>`がメソッド名になる(今回はget_updated)  
+
+処理としては
+1. メソッドの第二引数に自身の情報が色々渡されるっぽいのでそこからidを取得してobject.get()  
+1. models.py内のrelated_name(今回はschedules)を用いた逆参照で子要素を取得  
+1. datetime型は比較演算子で比較可能なのでfor文まわして最新の更新時間を取得
+
+### 参考
+[methodField](https://www.django-rest-framework.org/api-guide/fields/#serializermethodfield)  
+逆参照については「django model 逆参照」を検索してください、いい感じのなかった
+### 未解決
+メソッド名をmethodFieldに渡して指定する方法もあるっぽいがattribute Error?とかが出てうまくいかなかった。
+
+
 # manage.py shellでmodelのimportがうまくいかない
 #### python
 ```python
