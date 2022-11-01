@@ -52,3 +52,50 @@ print(func_annotations(4, 3))
 実行時に型チェックが行われたりはしないのでアノテーションで指定した型以外の引数を渡しても何も起こらない（エラーにならない）。
 
 [参考サイト](https://note.nkmk.me/python-function-annotations-typing/)  
+
+
+# 辞書とformat文の組み合わせ
+
+```python
+>>> dict = { "name": "Mike", "age": 28 }
+>>> "Name: {0[name]}, Age: {0[age]}".format(dict)
+'Name: Mike, Age: 28'
+```
+`{引数の添え字[辞書のキー]}`で辞書をそのまま渡してもいい感じに適応してくれるらしい。
+
+[Pythonのformatメソッドによる文字列フォーマットの方法](https://uxmilk.jp/40547#crayon-6360c02767bf8236995362)  
+
+
+# モジュールのポップアップでよく見たkwargsについて
+- *args: 複数の引数をタプルとして受け取る
+- **kwargs: 複数のキーワード引数を辞書として受け取る
+
+複数のやつをばらして渡したり、ポインタ関連のもの、たぶん。
+
+### コード(ちゃんと動く)
+```python
+area_url_format = "https://www.softbank.jp/shop/search/list/?pref={0[pref]}&area={0[area]}&cid=tpsk_191119_mobile"
+
+tmp_args = {
+    "pref": 13,
+    "area": 131172,
+}
+
+area_url = ScrapingBase.url_from_format(area_url_format, **tmp_args)
+```
+
+### エラー  
+キーワード引数としてしか扱えなくなり、位置引数として渡すと
+```python
+TypeError: test() takes 0 positional arguments but 1 was given
+```
+とか言われる。
+
+
+上記エラーはこのコードの最終行が`url_from_format(area_url_format, tmp_args)`だったために発生した。  
+これはtmp_argsに**を付けることによってキーワード引数の辞書として受け渡されるべきところを、位置引数として受け渡してしまっていたために起こった。
+
+
+### 参考
+[note.nkmk.me](https://note.nkmk.me/python-args-kwargs-usage/)  
+[Python 可変長引数（*args, **kwargs）とは](https://aiacademy.jp/media/?p=1496)
