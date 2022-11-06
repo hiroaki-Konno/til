@@ -1,5 +1,25 @@
 # VSCode.md
-  
+
+# vscode ショートカットキーの編集
+```json
+[
+  {
+    "key": "ctrl+shift+tab",
+    "command": "workbench.action.previousEditor"
+  },
+  {
+    "key": "ctrl+tab",
+    "command": "workbench.action.nextEditor"
+  },
+]
+```
+を追加  
+> Ctrl+PgUp/PgDownに割り当てられてるショートカットをCtrl+Tab/Ctrl+Shift+TabにすることでChromeライクにタブを切り替えられるようになってオススメです。
+
+
+<!-- link で変換可能 -->
+[参考qiita](https://qiita.com/TakahiRoyte/items/cdab6fca64da386a690b#%E6%A4%9C%E7%B4%A2%E3%81%A8%E7%BD%AE%E6%8F%9B-search-and-replace)  
+
 # vscodeで仮想環境を読み込みたい
 
 [ctrl] [shift] [p]でコマンドパレット、python:select interpreterから仮想環境を選択
