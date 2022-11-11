@@ -1,6 +1,74 @@
 <!-- snippet で変換可能 -->
-# serializerでfieldに関数を設定して動的な値を返す
+# drfのAPIで返ってくるフィールド名を変更する
 <!-- heading で各サイズのhタグ変換可能 -->
+
+```python
+# models.py
+class City(models.Model):
+    id = models.BigAutoField(primaly_key=True)
+    city_name = models.CharField(max_length=20, unique=True)
+    # pref instance(pk=1) = 未設定用
+    prefecture = models.ForeignKey(Prefecture, 
+                        on_delete=models.SET_DEFAULT, default=1)
+```
+```python
+# serializers.py
+class CitySerializer(serializers.ModelSerializer):
+    prefecture = serializers.someField(略)
+
+    class Meta:
+        model = models.City
+        fields = ['id', 'prefecture', 'city_name']
+```
+```json
+/* APIが返すjson形式の出力 */
+{    
+    "id": 1,
+    "prefecture": "未指定",
+    "city_name": "未設定"
+}
+```
+コードはスマクラナビ(2022時の実習)より
+### 前提
+Meta.field名はmodels.pyのクラスに定義したfieldたちの変数名が対応するように出来ている。  
+例としては`CitySerializer.Meta.fields`は`City`のfieldの変数名のものが指定できる
+
+### 問題
+APIが返す要素を任意の名称でMeta.fieldsに追加したい。  
+今回は例としてidをcity_idに変更する。
+
+### 解決
+```python
+# serializers.py
+class CitySerializer(serializers.ModelSerializer):
+    prefecture = serializers.someField(略)
+
+    # BigAutoFieldに指定されているが IntegerFieldの拡張なのでこれでよい
+    city_id = serializers.IntegerField(source='id')
+
+    class Meta:
+        model = models.City
+        # fields = ['id', 'prefecture', 'city_name']
+        fields = ['city_id','prefecture','city_name']
+```
+`<変更したい名前>` に `serializers.対応するfield(source='<変更前の名称>')`を代入し、その代入した変数名を`Meta.fields`に追記する
+### 結果
+```json
+/* 出力 */
+{    
+    "city_id": 1,
+    "prefecture": "未指定",
+    "city_name": "未設定"
+}
+```
+表示する名称を変更をすることが出来た。
+
+[参考サイト - Django REST Frameworkでフィールド名を変更する方法](https://www.web-dev-qa-db-ja.com/ja/django/django-rest-framework%E3%81%A7%E3%83%95%E3%82%A3%E3%83%BC%E3%83%AB%E3%83%89%E5%90%8D%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/1046156034/) 
+
+
+
+
+# serializerでfieldに関数を設定して動的な値を返す
 ### 目的
 
 子要素の最新のupdatedを取得して親のupdatedも更新するようにしたい 
