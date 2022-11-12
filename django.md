@@ -1,7 +1,25 @@
 <!-- snippet で変換可能 -->
-# drfのAPIで返ってくるフィールド名を変更する
-<!-- heading で各サイズのhタグ変換可能 -->
+# シリアライザーでデフォルト値を設定するにはどうすればよいですか?
 
+```python
+>---id = serializers.IntegerField()
+>---name = serializers.CharField()
+>---age = serializers.IntegerField()  
+```
+ageに対してデフォルト12を設定したい。
+
+### 解決
+```python
+age = serializers.IntegerField(default=12, initial=12)
+```
+requiredと同時に指定するとエラー吐くので注意
+
+[参考サイト](https://stackoverflow.com/questions/34215566/how-can-i-set-default-value-in-serializers)  
+[公式docs](https://www.django-rest-framework.org/api-guide/fields/#core-arguments)
+
+
+
+# drfのAPIで返ってくるフィールド名を変更する
 ```python
 # models.py
 class City(models.Model):
@@ -52,6 +70,9 @@ class CitySerializer(serializers.ModelSerializer):
         fields = ['city_id','prefecture','city_name']
 ```
 `<変更したい名前>` に `serializers.対応するfield(source='<変更前の名称>')`を代入し、その代入した変数名を`Meta.fields`に追記する
+
+対応する`models.field`と`serializers.field`の組み合わせ？は`serializers.ModelSerializer`の`serializer_field_mapping`に書かれていると思われるので参考までにメモ
+
 ### 結果
 ```json
 /* 出力 */
