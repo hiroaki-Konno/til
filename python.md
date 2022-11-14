@@ -1,3 +1,13 @@
+# python 目次
+- [python 目次](#python-目次)
+- [python 命名規則一覧](#python-命名規則一覧)
+  - [classのインスタンスをprintなりした時の表示を変更](#classのインスタンスをprintなりした時の表示を変更)
+- [関数アノテーション](#関数アノテーション)
+- [辞書とformat文の組み合わせ](#辞書とformat文の組み合わせ)
+- [モジュールのポップアップでよく見たkwargsについて](#モジュールのポップアップでよく見たkwargsについて)
+    - [追記](#追記)
+    - [参考](#参考)
+
 # python 命名規則一覧
 
 | 対象 | ルール | 例 |
@@ -70,9 +80,10 @@ print(func_annotations(4, 3))
 - *args: 複数の引数をタプルとして受け取る
 - **kwargs: 複数のキーワード引数を辞書として受け取る
 
-複数のやつをばらして渡したり、ポインタ関連のもの、たぶん。
+複数のやつをばらして渡したり、ポインタ関連のもの、たぶん。  
 
-### コード(ちゃんと動く)
+以下のコードはしっかりと動く。
+
 ```python
 area_url_format = "https://www.softbank.jp/shop/search/list/?pref={0[pref]}&area={0[area]}&cid=tpsk_191119_mobile"
 
@@ -84,17 +95,29 @@ tmp_args = {
 area_url = ScrapingBase.url_from_format(area_url_format, **tmp_args)
 ```
 
-### エラー  
-キーワード引数としてしか扱えなくなり、位置引数として渡すと
+上記コードだとキーワード引数としてしか扱えなくなり、コードの最終行を`url_from_format(area_url_format, tmp_args)`にして実行する(位置引数として渡す)と
+
 ```python
 TypeError: test() takes 0 positional arguments but 1 was given
 ```
 とか言われる。
 
+上記エラーはこのコードの最終行が`url_from_format(area_url_format, tmp_args)`だったために発生した。これは`tmp_args`に`**`を付けることによってキーワード引数の辞書として受け渡されるべきところを、位置引数として受け渡してしまっていたために起こった。
 
-上記エラーはこのコードの最終行が`url_from_format(area_url_format, tmp_args)`だったために発生した。  
-これはtmp_argsに**を付けることによってキーワード引数の辞書として受け渡されるべきところを、位置引数として受け渡してしまっていたために起こった。
+### 追記
+実際に起こっているのはこういうことだろうたぶんな図解
+```python
+tmp_args = {
+    "pref": 13,
+    "area": 131172,
+}
 
+func(tmp_args)は第一引数として渡しているだけだが
+
+func(**tmp_args)の場合は
+func(pref=13, area=131172)と同義
+
+```
 
 ### 参考
 [note.nkmk.me](https://note.nkmk.me/python-args-kwargs-usage/)  

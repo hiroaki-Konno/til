@@ -1,4 +1,12 @@
-## bootstrapのカラム割り 横スクロールバーが出てくる
+# html, css 目次
+- [html, css 目次](#html-css-目次)
+- [bootstrapのカラム割り 横スクロールバーが出てくる](#bootstrapのカラム割り-横スクロールバーが出てくる)
+- [marginが相殺される(marginがうまく足されない)](#marginが相殺されるmarginがうまく足されない)
+- [block要素を左寄せ、中央寄せ、右寄せする方法](#block要素を左寄せ中央寄せ右寄せする方法)
+- [\<label\> (label要素)](#label-label要素)
+
+
+# bootstrapのカラム割り 横スクロールバーが出てくる
 カラム割りの時に使う row クラスにwidth 100%を指定することで対処  
 【css】 
 ```css 
@@ -7,7 +15,7 @@
 } 
 ``` 
 
-## marginが相殺される(marginがうまく足されない)
+# marginが相殺される(marginがうまく足されない)
 headerなどをposition:fixed等で判定をなくしておりそれの回り込み回避のためのmarginを指定しているdivがあるはず  
 そこにほんの少しでも良いのでpaddingを設定することでmargin同士が吸われなくなる
 
@@ -45,7 +53,7 @@ headerなどをposition:fixed等で判定をなくしておりそれの回り込
 }
 ```
 
-## block要素を左寄せ、中央寄せ、右寄せする方法
+# block要素を左寄せ、中央寄せ、右寄せする方法
 [参考リンク](https://www.acky.info/tips/css/0002.html)  
 div・p・ul・li・dlなどのブロック要素を左寄せ・中央寄せ・右寄せするときはwidthとmarginを使います。
 中央寄せのmargin-right: auto; margin-right: auto;をしっかり覚えましょう。
@@ -56,7 +64,7 @@ div・p・ul・li・dlなどのブロック要素を左寄せ・中央寄せ・�
 - 中央寄せは、ブロック要素にwidth(幅)を指定して margin-left: auto;margin-right: auto;
 - 右寄せは、ブロック要素にwidth(幅)を指定してmargin-left: auto;
 
-## \<label\> (label要素)
+# \<label\> (label要素)
 [参考リンク](http://www.htmq.com/html/label.shtml)  
 
 \<LABEL\>タグはフォームの構成部品（一行テキストボックス・チェックボックス・ラジオボタン等）と、 その項目名（ラベル）を明確に関連付けるための要素です。 これによりチェックボックスやラジオボタンでは、 関連付けられたテキスト部分をクリックしてもチェックを付けることができるようになります。  

@@ -1,3 +1,34 @@
+# django 目次
+- [django 目次](#django-目次)
+- [シリアライザーでデフォルト値を設定するにはどうすればよいですか?](#シリアライザーでデフォルト値を設定するにはどうすればよいですか)
+    - [解決](#解決)
+- [drfのAPIで返ってくるフィールド名を変更する](#drfのapiで返ってくるフィールド名を変更する)
+    - [解決](#解決-1)
+- [serializerでfieldに関数を設定して動的な値を返す](#serializerでfieldに関数を設定して動的な値を返す)
+    - [解決](#解決-2)
+    - [参考](#参考)
+- [manage.py shellでmodelのimportがうまくいかない](#managepy-shellでmodelのimportがうまくいかない)
+    - [解決](#解決-3)
+- [djangoのmodels.pyをUMLに自動で起こす](#djangoのmodelspyをumlに自動で起こす)
+    - [必要パッケージ](#必要パッケージ)
+    - [参考](#参考-1)
+- [runserver時 no such table:django_sessionが出た場合](#runserver時-no-such-tabledjango_sessionが出た場合)
+- [リンクや画像のソースに変数を用いて動的に扱う方法](#リンクや画像のソースに変数を用いて動的に扱う方法)
+- [django の環境上でローカルの python ファイルをアナコンダプロンプトで実行する](#django-の環境上でローカルの-python-ファイルをアナコンダプロンプトで実行する)
+- [templateの継承、インクルード](#templateの継承インクルード)
+  - [継承：{% block 名前 %} と {% extends 'base.html '%}](#継承-block-名前--と--extends-basehtml-)
+  - [インクルード ( include )](#インクルード--include-)
+- [テンプレートでの文字列連結](#テンプレートでの文字列連結)
+  - [注意事項](#注意事項)
+    - [回避案](#回避案)
+      - [実行結果](#実行結果)
+- [カスタムテンプレートフィルタ・テンプレートタグの作り方](#カスタムテンプレートフィルタテンプレートタグの作り方)
+  - [テンプレートフィルタ / タグとは](#テンプレートフィルタ--タグとは)
+  - [カスタムテンプレートフィルタ / タグの作り方](#カスタムテンプレートフィルタ--タグの作り方)
+  - [カスタムテンプレートフィルタの作り方](#カスタムテンプレートフィルタの作り方)
+  - [カスタムテンプレートタグの作り方](#カスタムテンプレートタグの作り方)
+  - [テンプレートフィルタとテンプレートタグの使い分け](#テンプレートフィルタとテンプレートタグの使い分け)
+
 <!-- snippet で変換可能 -->
 # シリアライザーでデフォルト値を設定するにはどうすればよいですか?
 
@@ -46,12 +77,11 @@ class CitySerializer(serializers.ModelSerializer):
     "city_name": "未設定"
 }
 ```
-コードはスマクラナビ(2022時の実習)より
-### 前提
+コードはスマクラナビ(2022時の実習)より  
+
 Meta.field名はmodels.pyのクラスに定義したfieldたちの変数名が対応するように出来ている。  
 例としては`CitySerializer.Meta.fields`は`City`のfieldの変数名のものが指定できる
 
-### 問題
 APIが返す要素を任意の名称でMeta.fieldsに追加したい。  
 今回は例としてidをcity_idに変更する。
 
@@ -73,7 +103,6 @@ class CitySerializer(serializers.ModelSerializer):
 
 対応する`models.field`と`serializers.field`の組み合わせ？は`serializers.ModelSerializer`の`serializer_field_mapping`に書かれていると思われるので参考までにメモ
 
-### 結果
 ```json
 /* 出力 */
 {    
@@ -90,14 +119,12 @@ class CitySerializer(serializers.ModelSerializer):
 
 
 # serializerでfieldに関数を設定して動的な値を返す
-### 目的
 
 子要素の最新のupdatedを取得して親のupdatedも更新するようにしたい 
 
 ### 解決
 1対多の参照をmodel内に定義するのは難しそうだったのでmodelに対応したserializerのクラスに関数を絡ませたfieldを作った。
 
-### 詳細
 serializer内に
 ```python
 class SomeSerializer(serializers.ModelSerializer):    
@@ -118,36 +145,33 @@ class SomeSerializer(serializers.ModelSerializer):
 
         return latest_date
 ```
-を追加  
-`get_<field_name>`がメソッド名になる(今回はget_updated)  
+を追加。`get_<field_name>`がメソッド名になる(今回はget_updated)  
 
 処理としては
 1. メソッドの第二引数に自身の情報が色々渡されるっぽいのでそこからidを取得してobject.get()  
-1. models.py内のrelated_name(今回はschedules)を用いた逆参照で子要素を取得  
-1. datetime型は比較演算子で比較可能なのでfor文まわして最新の更新時間を取得
+2. models.py内のrelated_name(今回はschedules)を用いた逆参照で子要素を取得  
+3. datetime型は比較演算子で比較可能なのでfor文まわして最新の更新時間を取得
+
+メソッド名をmethodFieldに渡して指定する方法もあるっぽいがattribute Error?とかが出てうまくいかなかった。
 
 ### 参考
 [methodField](https://www.django-rest-framework.org/api-guide/fields/#serializermethodfield)  
 逆参照については「django model 逆参照」を検索してください、いい感じのなかった
-### 未解決
-メソッド名をmethodFieldに渡して指定する方法もあるっぽいがattribute Error?とかが出てうまくいかなかった。
+
 
 
 # manage.py shellでmodelのimportがうまくいかない
-#### python
 ```python
 from models import TestSaveData
 ```
 
-#### error
 ```shell
 File "C:\Users\iniad\smaclanavi_background\administer_data\scraping.py", line 2, in <module>
     from models import TestSaveData
 ModuleNotFoundError: No module named 'models'
 ```
-moduleが見つからないと言われてしまう
+pythonでimportしようとするとmoduleが見つからないと言われてしまう
 ### 解決
-#### python
 ```python
 from administer_data.models import TestSaveData
 ```
@@ -354,8 +378,8 @@ addで連結するのもが文字列の場合、想定通りの結果となり�
 文字列連結用のカスタムタグを定義して使用します。
 
 以下のようなファイルを作成します。  
-\<appname>\\templatetags\\\<appname>_extras.py
-#### ソース
+`<appname>\templatetags\<appname>_extras.py`
+
 ```python
 from django import template
 
