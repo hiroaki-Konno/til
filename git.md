@@ -7,6 +7,12 @@
     - [コミット種別](#コミット種別)
       - [通常版](#通常版)
       - [ライト版](#ライト版)
+- [gitのaliasを登録する(短縮形設定できるやつ)](#gitのaliasを登録する短縮形設定できるやつ)
+  - [aliasを設定する前に](#aliasを設定する前に)
+    - [gitコマンドを使ってエイリアス設定(こっち使った)](#gitコマンドを使ってエイリアス設定こっち使った)
+    - [設定ファイルに直接記述](#設定ファイルに直接記述)
+  - [実際に登録したalias](#実際に登録したalias)
+      - [参考](#参考)
 - [ワーキングツリー、インデックス、HEADを使いこなす](#ワーキングツリーインデックスheadを使いこなす)
 - [Git コマンドを実行するとMore?と表示される](#git-コマンドを実行するとmoreと表示される)
     - [原因](#原因)
@@ -49,6 +55,53 @@
 - add：新規（ファイル）機能追加
 - update：機能修正（バグではない）
 - remove：削除（ファイル）
+
+# gitのaliasを登録する(短縮形設定できるやつ)
+## aliasを設定する前に
+gitコマンドのaliasの設定の仕方は
+- gitコマンドを使う
+- ~/.gitconfig等、設定ファイルに直接記述  
+
+の2通り、記事の主旨と逸れるので簡単に。
+
+### gitコマンドを使ってエイリアス設定(こっち使った) 
+```
+# コマンドにスペースが入らない場合はそのまま記載
+$ git config --global alias.ch checkout
+
+# コマンドでスペースを入れる場合は "" で囲む
+$ git config --global alias.chb "checkout -b"
+```
+--globalの部分は--system・--local・--worktreeがあるのでお好みで。
+
+### 設定ファイルに直接記述
+vim ~/.gitconfig等で設定。  
+設定ファイルいじるのに慣れている人はこちらが速いと思います。
+```console
+~/.gitconfig
+[color]
+      ui = auto
+・
+・
+[alias]
+    ch = checkout
+    chb = checkout -b
+```
+
+## 実際に登録したalias
+```console
+<!--
+git <短縮形> -> git <本来のやつ>
+git config --global alias.<短縮系> <本来のやつ> で登録した
+-->
+git ch -> git checkout
+git br -> git branch
+git st -> git status
+git sh -> git stash
+git la -> git log --oneline --decorate --graph --branches --tags --remotes --all
+```
+#### 参考
+[Git大好き人間のおすすめGit alias設定 | tech-broccoli.life](https://tech-broccoli.life/articles/engineer/recommend-git-aliases/)  
 
 # ワーキングツリー、インデックス、HEADを使いこなす
 [参考サイト](https://qiita.com/shuntaro_tamura/items/db1aef9cf9d78db50ffe)  
