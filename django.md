@@ -1,4 +1,7 @@
 # django 目次
+<details>
+<summary>目次</summary>
+
 - [django 目次](#django-目次)
 - [シリアライザーでデフォルト値を設定するにはどうすればよいですか?](#シリアライザーでデフォルト値を設定するにはどうすればよいですか)
     - [解決](#解決)
@@ -12,7 +15,7 @@
 - [djangoのmodels.pyをUMLに自動で起こす](#djangoのmodelspyをumlに自動で起こす)
     - [必要パッケージ](#必要パッケージ)
     - [参考](#参考-1)
-- [runserver時 no such table:django_sessionが出た場合](#runserver時-no-such-tabledjango_sessionが出た場合)
+- [runserver時 no such table:django\_sessionが出た場合](#runserver時-no-such-tabledjango_sessionが出た場合)
 - [リンクや画像のソースに変数を用いて動的に扱う方法](#リンクや画像のソースに変数を用いて動的に扱う方法)
 - [django の環境上でローカルの python ファイルをアナコンダプロンプトで実行する](#django-の環境上でローカルの-python-ファイルをアナコンダプロンプトで実行する)
 - [templateの継承、インクルード](#templateの継承インクルード)
@@ -28,6 +31,8 @@
   - [カスタムテンプレートフィルタの作り方](#カスタムテンプレートフィルタの作り方)
   - [カスタムテンプレートタグの作り方](#カスタムテンプレートタグの作り方)
   - [テンプレートフィルタとテンプレートタグの使い分け](#テンプレートフィルタとテンプレートタグの使い分け)
+
+</details>
 
 <!-- snippet で変換可能 -->
 # シリアライザーでデフォルト値を設定するにはどうすればよいですか?

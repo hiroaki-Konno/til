@@ -1,10 +1,14 @@
 # html, css 目次
+<details>
+<summary>目次</summary>
+
 - [html, css 目次](#html-css-目次)
 - [bootstrapのカラム割り 横スクロールバーが出てくる](#bootstrapのカラム割り-横スクロールバーが出てくる)
 - [marginが相殺される(marginがうまく足されない)](#marginが相殺されるmarginがうまく足されない)
 - [block要素を左寄せ、中央寄せ、右寄せする方法](#block要素を左寄せ中央寄せ右寄せする方法)
 - [\<label\> (label要素)](#label-label要素)
 
+</details>
 
 # bootstrapのカラム割り 横スクロールバーが出てくる
 カラム割りの時に使う row クラスにwidth 100%を指定することで対処  

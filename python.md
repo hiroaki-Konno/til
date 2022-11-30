@@ -1,4 +1,7 @@
 # python 目次
+<details>
+<summary>目次</summary>
+
 - [python 目次](#python-目次)
 - [python 命名規則一覧](#python-命名規則一覧)
   - [classのインスタンスをprintなりした時の表示を変更](#classのインスタンスをprintなりした時の表示を変更)
@@ -7,6 +10,8 @@
 - [モジュールのポップアップでよく見たkwargsについて](#モジュールのポップアップでよく見たkwargsについて)
     - [追記](#追記)
     - [参考](#参考)
+
+</details>
 
 # python 命名規則一覧
 

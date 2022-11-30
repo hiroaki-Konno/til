@@ -1,4 +1,7 @@
 # VSCode 目次
+<details>
+<summary>目次</summary>
+
 - [VSCode 目次](#vscode-目次)
 - [vscode ショートカットキーの編集](#vscode-ショートカットキーの編集)
 	- [開いているファイルタブの移動](#開いているファイルタブの移動)
@@ -9,6 +12,7 @@
 - [Markdown 予測変換](#markdown-予測変換)
 			- [headingN (Nは任意の数字)](#headingn-nは任意の数字)
 
+</details>
 
 # vscode ショートカットキーの編集
 ## 開いているファイルタブの移動

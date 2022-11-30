@@ -1,4 +1,7 @@
 # Java 目次
+<details>
+<summary>目次</summary>
+
 - [Java 目次](#java-目次)
 - [データ型](#データ型)
     - [整数](#整数)
@@ -20,6 +23,7 @@
   - [final修飾子](#final修飾子)
   - [abstract修飾子](#abstract修飾子)
 
+</details>
 
 # データ型
 ### 整数
